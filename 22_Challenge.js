@@ -5,3 +5,5 @@ var value;
 while(value =fruits[i++]){
     console.log(value);
 }
+
+/*Mostrará todo el array en la consola*/ 
