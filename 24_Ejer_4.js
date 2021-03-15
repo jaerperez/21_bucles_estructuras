@@ -7,22 +7,21 @@ class Person {
         this.user = user;
         this.age = age;
     }
-    getid() {return this.id;}
-    setid(value) {this.id=value;}
-    getname(){return this.name;}
-    setname(value){this.name=value;}
-    getlastname(){return this.lastname;}
-    setlastname(value){this.lastname=value;}
-    getemail(){return this.email;}
-    setemail(value){this.email=value;}
-    getuser(){return this.user;}
-    setuser(value){this.user=value;}
-    getage(){return this.age;}
-    setage(value){this.age=value;}
-    getinf() {
-        return "Estos son los nuevos datos "+'\n'+this.id+'\n'+ this.name+'\n'+ this.lastname+'\n'+ this.email+'\n'+ this.age;
+    getid() { return this.id; }
+    setid(value) { this.id = value; }
+    getname() { return this.name; }
+    setname(value) { this.name = value; }
+    getlastname() { return this.lastname; }
+    setlastname(value) { this.lastname = value; }
+    getemail() { return this.email; }
+    setemail(value) { this.email = value; }
+    getuser() { return this.user; }
+    setuser(value) { this.user = value; }
+    getage() { return this.age; }
+    setage(value) { this.age = value; }
+    toString() {
+        return "Estos son los nuevos datos " + '\n' + this.id + '\n' + this.name + '\n' + this.lastname + '\n' + this.email + '\n' + this.age;
     }
-
 
 }
 
@@ -34,39 +33,49 @@ let user5 = new Person(1144145, "Jose", "perez", "h@gmail.com", "Jose03", 23);
 let user6 = new Person(1144146, "Emma", "perez", "h@gmail.com", "Emma03", 23);
 let users = [user1, user2, user3, user4, user5, user6];
 
+function check_usernew(id) {
+    for (let i = 0; i < users.length; i++) {
+        let id_person = users[i].getid();
+        if (id_person == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function update_user(objeto_persona) {
+
+    let new_id = prompt("Ingrese nueva identificación de usuario: ");
+    objeto_persona.setid(new_id);
+    let new_name = prompt("Ingrese nuevo nombre de usuario: ");
+    objeto_persona.setname(new_name);
+    let new_lastname = prompt("Ingrese nuevo apellido de usuario: ");
+    objeto_persona.setlastname(new_lastname);
+    let new_email = prompt("Ingrese nuevo email de usuario: ");
+    objeto_persona.setemail(new_email);
+    let new_user = prompt("Ingrese nuevo usuario: ");
+    objeto_persona.setuser(new_user);
+    let new_age = prompt("Ingrese nueva edad: ");
+    objeto_persona.setage(new_age);
+    alert(objeto_persona.toString());
+}
 
 
-function update_user() {
+
+function update() {
     let result = confirm("Desea actualizar los datos del usuario? ");
     if (result) {
         let id = prompt("Ingrese identificación de usuario para su actualización de datos: ");
-        for (let i = 0; i < users.length; i++) {
-            let n = users[i].getid();
-            if (n == id) {
-                let new_id = prompt("Ingrese nueva identificación de usuario: ");
-                users[i].setid(new_id);
-                let new_name= prompt("Ingrese nuevo nombre de usuario: ");
-                users[i].setname(new_name);
-                let new_lastname= prompt("Ingrese nuevo apellido de usuario: ");
-                users[i].setlastname(new_lastname);
-                let new_email= prompt("Ingrese nuevo email de usuario: ");
-                users[i].setemail(new_email);
-                let new_user= prompt("Ingrese nuevo usuario: ");
-                users[i].setuser(new_user);
-                let new_age= prompt("Ingrese nueva edad: ");
-                users[i].setage(new_age);
-                alert(users[i].getinf());
-            }
-        }
-
-    } else {
-        alert("User already exists");
-
+        let pos= check_usernew(id);
+        if(pos>=0){
+            let person=users[pos];
+            update_user(person);
+        }else alert ("Usuario no encontrado"); 
     }
 }
 
-console.log(users);
-update_user();
+
+update();
 console.log(users);
 
 
